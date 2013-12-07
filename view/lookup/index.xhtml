@@ -1,0 +1,11 @@
+<document type="xml/freeswitch-httapi">
+ <variables>
+   <effective_caller_id_number>#{@num}</effective_caller_id_number>
+   <outbound_caller_id_number>#{@num}</outbound_caller_id_number>
+ </variables>
+ <work>
+   <execute application="export" data="effective_caller_id_number=#{@num}" />
+   <execute application="export" data="outbound_caller_id_number=#{@num}" />
+   <break />
+ </work>
+</document>
