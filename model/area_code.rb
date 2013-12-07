@@ -7,11 +7,25 @@ module DCID
       end
     end
 
+    def <<(number)
+      if numbers.nil?
+        self.numbers = Sequel.pg_array [number]
+      else
+        self.numbers << number
+      end
+    end
+
+    def add_number(number)
+      self << number
+      save
+    end
+
     def closest
       all_distances_from_me.first
     end
 
     def best_match
+      return self if numbers
       if (my_state = codes_in_my_state.all).size > 0
         my_state[rand(my_state.size)]
       else

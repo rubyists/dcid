@@ -1,0 +1,9 @@
+# .gems generated gem export file. Note that any env variable settings will be missing. Append these after using a ';' field separator
+
+bacon -v 1.2.0
+innate 2013.02.21
+log4r 1.1.10
+pg 0.17.0
+pgpass 2012.01.18
+sequel 4.5.0
+thin 1.6.1
