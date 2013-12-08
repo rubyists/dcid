@@ -1,0 +1,19 @@
+<div id="number_table_div"></div>
+<script>
+  $(document).ready(function() {
+    $('#number_table_div').html('<table cellpadding="0" cellspacing="0" border="0" class="display table table-striped table-hover table-bordered" id="number_list"></table>' );
+    $('#number_list').dataTable ( {
+      "sPaginationType": "bs_normal",
+      "aaData": [
+        #{@numbers.join(",\n")}
+      ],
+      "aoColumns": [
+        { "sTitle": "Area Code", "sWidth": "3em" },
+        { "sTitle": "City" },
+        { "sTitle": "State", "sWidth": "3em" },
+        { "sTitle": "Zip", "sWidth": "5em" },
+        { "sTitle": "Numbers" }
+      ]
+    });
+  });
+</script>

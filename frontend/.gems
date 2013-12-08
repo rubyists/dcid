@@ -2,8 +2,9 @@
 
 bacon -v 1.2.0
 innate -v 2013.02.21
-log4r  -v1.1.10
-pg  -v0.17.0
-pgpass  -v2012.01.18
-sequel  -v4.5.0
-thin  -v1.6.1
+ramaze -v 2012.12.08
+log4r -v 1.1.10
+pg -v 0.17.0
+pgpass -v 2012.01.18
+sequel -v 4.5.0
+thin -v 1.6.1

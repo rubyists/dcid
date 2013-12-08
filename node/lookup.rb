@@ -14,5 +14,11 @@ module DCID
         @num = nums[rand(nums.count)]
       end
     end
+
+    def inbound(from, to)
+      if owner = DCID::Call.who_owns(from, to)
+        @user = owner
+      end
+    end
   end
 end

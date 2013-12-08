@@ -1,0 +1,8 @@
+<document type="xml/freeswitch-httapi">
+ <work>
+ <?r if @user ?>
+   <execute application="transfer" data="#{@user} XML default" />
+ <?r end ?>
+   <break />
+ </work>
+</document>

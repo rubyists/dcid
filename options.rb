@@ -24,8 +24,8 @@ module DCID
     sub :tiny_cdr do
       o 'TinyCdr postgres database uri', :db,
         ENV["DCID_TinyCdrDB"] || pgpass.(database: 'tiny_cdr')
-      o 'TinyCdr couch db uri', :couch_uri,
-        ENV["DCID_TinyCdrCouchURI"]
+      o 'TinyCdr Root', :root,
+        ENV["DCID_TinyCdrRoot"]
     end
 
     o "Log Level (DEBUG, DEVEL, INFO, NOTICE, ERROR, CRIT)", :log_level,

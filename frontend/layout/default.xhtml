@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>#{@title}</title>
+
+        #{css('bootstrap')}
+        #{css('bootstrap-theme')}
+        #{css('style')}
+        #{js('bower_components/jquery/jquery')}
+        #{js('bootstrap.min')}
+        #{js('site')}
+        #{@head}
+    </head>
+    <body>
+      <div id="wrap">
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse" >
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="#">DCID</a>
+            </div>
+            <div class="collapse navbar-collapse">
+              <ul class="nav navbar-nav">
+                <li>
+                    <a class="btn" href="/numbers/">Numbers</a>
+                </li>
+                <li>
+                    <a class="btn" href="/routing">
+                        Routing
+                    </a>
+                </li>
+              </ul>
+              <ul class="nav pull-right">
+                <?r if !logged_in? ?>
+                <li class="dropdown">
+                  <a id="loginDropdown" class="btn dropdown-toggle" data-target="#" data-toggle="dropdown" href="/login">
+                    Log In <span class="caret"></span>
+                  </a>
+                  <div class="dropdown-menu" id="loginMenu" aria-labeledby="loginDropdown">
+                    <form method="post" action="/login" class="form" role="form">
+                      <div class="form-group">
+                        <label class="sr-only" for="username">User Name</label>
+                        <input type="text" class="form-control" tabindex="1" id="username" name="username" placeholder="Username" autofocus />
+                        <label class="sr-only" for="password">Password</label>
+                        <input type="password" class="form-control" tabindex="2" id="password" name="password" placeholder="Password" />
+                      </div>
+                      <div class="form-group">
+                        <button type="submit" class="btn btn-primary form-control">Log In</button>
+                      </div>
+                    </form>
+                  </div>
+                </li>
+                <?r else ?>
+                <li>
+                  <a class="btn" href="/logout">Log Out</a>
+                </li>
+                <?r end ?>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="container">
+          <div class="page-header">
+            <h1>#{@title}</h1>
+          </div> 
+
+          <div id="content" class="container">
+              #{@content}
+          </div>
+        </div>
+
+      </div>
+      <div id="footer">
+        <div class="container">
+          <p class="text-muted">
+              Ramaze is free software and is licensed under the MIT license.
+              All textual content is licensed under a 
+              <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/">
+                  Creative Commons license.
+              </a>
+          </p>
+        </div>
+      </div>
+    </body>
+</html>
