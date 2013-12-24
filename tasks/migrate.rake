@@ -5,22 +5,22 @@
 desc "migrate to latest version of db"
 task :migrate, :version do |_, args|
   args.with_defaults(:version => nil)
-  require_relative '../lib/tiny_cdr'
-  require_relative '../lib/tiny_cdr/db'
+  require_relative '../lib/dcid'
+  require_relative '../lib/dcid/db'
   require 'sequel/extensions/migration'
 
-  raise "No DB found" unless TinyCdr.db
+  raise "No DB found" unless DCID.db
 
   #require_relative '../model/init'
 
   require 'nokogiri'
   require 'sequel'
 
-  DB = TinyCdr.setup_db
+  DB = DCID.db
 
   if args.version.nil?
-    Sequel::Migrator.apply(TinyCdr.db, TinyCdr::MIGRATION_ROOT)
+    Sequel::Migrator.apply(DCID.db, DCID::MIGRATION_ROOT)
   else
-    Sequel::Migrator.run(TinyCdr.db, TinyCdr::MIGRATION_ROOT, :target => args.version.to_i)
+    Sequel::Migrator.run(DCID.db, DCID::MIGRATION_ROOT, :target => args.version.to_i)
   end
 end

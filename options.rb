@@ -36,5 +36,17 @@ module DCID
 
     o "Mode for spec", :mode,
       ENV['TCC_Mode'] || 'live'
+
+    o "Ldap Host", :ldap_host, ENV["DCID_LdapHost"]
+
+    o "Ldap Port", :ldap_port, ENV["DCID_LdapPort"] || 389
+
+    o "Ldap Domain", :ldap_domain, ENV["DCID_LdapDomain"]
+
+    o "Ldap User Attribute", :ldap_user_attrib, ENV["DCID_LdapUserAttrib"]
+
+    o "Ldap Phone Attribute", :ldap_phone_attrib, ENV["DCID_LdapPhoneAttrib"] || "ipPhone"
+
+    o "Ldap Tree Base", :ldap_base, ENV["DCID_LdapBase"]
   end
 end

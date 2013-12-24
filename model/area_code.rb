@@ -1,6 +1,5 @@
 module DCID
   class AreaCode < Sequel::Model
-    using DCID
     dataset_module do
       def owned
         exclude(numbers: nil)

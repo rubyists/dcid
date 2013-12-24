@@ -5,13 +5,18 @@ module DCID
     provide(:html, {:type => "text/xml", :engine => :Etanni})
 
     def index(from, to)
-      to_code = AreaCode[code: to[0,3]]
-      if to_code
-        best = to_code.best_match
-        @num = best.numbers[rand(best.numbers.count)]
+      routing = Route[cid: from]
+      if routing && routing.route != 'default'
+        @num = routing.number 
       else
-        nums = AreaCode.owned.all
-        @num = nums[rand(nums.count)]
+        to_code = AreaCode[code: to[0,3]]
+        if to_code
+          best = to_code.best_match
+          @num = best.numbers[rand(best.numbers.count)]
+        else
+          nums = AreaCode.owned.all
+          @num = nums[rand(nums.count)]
+        end
       end
     end
 

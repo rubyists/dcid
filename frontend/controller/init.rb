@@ -4,8 +4,14 @@
 
 class Controller < Ramaze::Controller
   layout :default
-  helper :xhtml
+  helper :xhtml, :user, :stack
   engine :etanni
+  trait :user_model => DCID::LdapUser
+
+  def login_first
+    return if logged_in?
+    call MainController.r(:login)
+  end
 end
 
 # Here you can require all your other controllers. Note that if you have multiple
@@ -16,3 +22,4 @@ end
 #  end
 #
 require __DIR__('main')
+require __DIR__('routing')

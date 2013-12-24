@@ -13,7 +13,6 @@ end
 
 # Choose outbound caller id based on location
 module DCID
-  autoload :VERSION, "dcid/version"
   Log = Log4r::Logger.new("DCID")
   ROOT = (Pathname(__FILE__)/'../..').expand_path
   LIBROOT = ROOT/:lib
@@ -21,5 +20,6 @@ module DCID
   MODEL_ROOT = ROOT/:model
   SPEC_HELPER_PATH = ROOT/:spec
 end
+require_relative "dcid/version"
 DCID::Log.outputters = Log4r::StdoutOutputter.new("DCID")
 DCID::Log.info "Loaded DCID"
