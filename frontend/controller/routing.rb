@@ -14,25 +14,49 @@ class Routing < Controller
   def index(where = nil)
     login_first
     Ramaze::Log.info "Hey!"
-    extension = user.extension
+    @name = user[:cn]
+    @extension = user.extension
+    @did = user[:pager]
+    @did = nil if @did.empty?
     @title = "Choose Route"
     add_to_head = [css("datatables-bs3"), 
                    js('jquery.dataTables.min'),
                    js('datatables-bs3')]
     @head = add_to_head.join("\n")
-    extension
+    @available_numbers = DCID::AreaCode.filter(Sequel.~(numbers: nil)).sort { |a,b| a.state <=> b.state }
+    if current_route
+      @selected = current_route.number
+    else
+      @selected = 'Dynamic'
+    end
   end
 
-  # the string returned at the end of the function is used as the html body
-  # if there is no template for the action. if there is a template, the string
-  # is silently ignored
-  def notemplate
-    @title = 'Welcome to Ramaze!'
-    
-    return 'There is no \'notemplate.xhtml\' associated with this action.'
+  def set(extension)
+    @ext = user.extension
+    unless extension == @ext
+      flash[:error] = "You cannot change the caller id for someone else!"
+      redirect_referer
+    end
+    unless cid = request.params["routeSelect"]
+      flash[:error] = "You must supply a Caller ID! #{request.params}"
+      redirect_referer
+    end
+    if current_route
+      if cid == 'Dynamic'
+        current_route.delete
+      else
+        current_route.update(number: cid)
+      end
+    else
+      DCID::Route.create(cid: extension, number: cid) unless cid == 'Dynamic'
+    end
+    redirect :routing
   end
 
-  def logged_in?
-    false
+  private
+  def current_route(extension = nil)
+    extension ||= user.extension
+    @route ||= DCID::Route.first(cid: extension)
   end
+
 end

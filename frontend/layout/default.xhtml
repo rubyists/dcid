@@ -68,10 +68,17 @@
         </div>
 
         <div class="container">
-          <div class="page-header">
+          <div class="page-header col-sm-12">
             <h1>#{@title}</h1>
           </div> 
 
+          <div id="errors" class="container">
+             <div class="col-sm-12">
+               <span class="bg-danger text-danger">
+                 <h4>#{flash[:error]}</h4>
+               </span>
+             </div>
+          </div>
           <div id="content" class="container">
               #{@content}
           </div>

@@ -1,8 +1,15 @@
 module DCID
   class AreaCode < Sequel::Model
+    attr_accessor :latitude, :longitude
     dataset_module do
       def owned
         exclude(numbers: nil)
+      end
+    end
+
+    def before_save
+      if latitude && longitude
+        self[:the_geom] = Sequel.function(:st_geomfromtext, "POINT(%s %s)" % [longitude, latitude], 4326)
       end
     end
 

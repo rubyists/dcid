@@ -7,3 +7,4 @@ pg  -v0.17.0
 pgpass  -v2012.01.18
 sequel  -v4.5.0
 thin  -v1.6.1
+net-ldap -v0.3.1

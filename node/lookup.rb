@@ -6,7 +6,7 @@ module DCID
 
     def index(from, to)
       routing = Route[cid: from]
-      if routing && routing.route != 'default'
+      if routing
         @num = routing.number 
       else
         to_code = AreaCode[code: to[0,3]]

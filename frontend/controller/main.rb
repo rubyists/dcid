@@ -14,6 +14,7 @@ class MainController < Controller
   def index
     login_first
     @title = 'Welcome to DCID!'
+    redirect :routing
   end
 
   def login
@@ -35,14 +36,14 @@ class MainController < Controller
 
   def numbers(where = nil)
     if where.nil?
-      nums = AreaCode.all
+      nums = DCID::AreaCode.all
     else
       if where == "owned"
-        nums = AreaCode.owned.all
+        nums = DCID::AreaCode.owned.all
       elsif where =~ /\d\d\d+/
-        nums = AreaCode.filter(:code => /#{where[0,3]}/)
+        nums = DCID::AreaCode.filter(:code => /#{where[0,3]}/)
       else
-        nums = AreaCode.filter(:city => /#{where}/i)
+        nums = DCID::AreaCode.filter(:city => /#{where}/i)
       end
     end
     @title = "Number Listing"
@@ -61,16 +62,4 @@ class MainController < Controller
     end
   end
 
-  # the string returned at the end of the function is used as the html body
-  # if there is no template for the action. if there is a template, the string
-  # is silently ignored
-  def notemplate
-    @title = 'Welcome to Ramaze!'
-    
-    return 'There is no \'notemplate.xhtml\' associated with this action.'
-  end
-
-  def logged_in?
-    false
-  end
 end
