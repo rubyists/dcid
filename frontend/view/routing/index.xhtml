@@ -1,0 +1,39 @@
+<?r if @selected ?>
+<div id="Current Route" class="container-fluid">
+  <p class="bg-warning text-info">Current Route: #{@selected}</p>
+</div>
+<?r end ?>
+<div id="routing_div" class="col-sm-8">
+  <form class="form-horizontal" role="form" action="/routing/set/#@extension" method="post">
+    <label for="routeSelect" class="col-sm-4 control-label">Select CallerID Number</label>
+    <div class="col-sm-5">
+      <select name="routeSelect" id="routeSelect" class="form-control">
+        <?r if @selection == 'Dynamic' ?>
+        <option selected="selected">Dynamic</option>
+        <?r else ?>
+        <option>Dynamic</option>
+        <?r end ?>
+        <?r if @did ?>
+          <?r if @selected.nil? ?>
+          <option selected="selected" value="#{@did}">#@did - Your DID</option>
+          <?r else ?>
+          <option value="#{@did}">#@did - Your DID</option>
+          <?r end ?>
+        <?r end ?>
+        <?r @available_numbers.each do |num| ?>
+          <?r citystate = [num.city, num.state].join(", ") ?>
+          <?r num.numbers.each do |number| ?>
+            <?r if @selected && @selected == number ?>
+            <option selected="selected" value="#{number}">#{number} - #{citystate}</option>
+            <?r else ?>
+            <option value="#{number}">#{number} - #{citystate}</option>
+            <?r end ?>
+          <?r end ?>
+        <?r end ?>
+      </select>
+    </div>
+    <div class="col-sm-3">
+      <input type="submit" value="Set This Route">
+    </div>
+  </form>
+</div>
